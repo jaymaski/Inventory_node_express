@@ -2,7 +2,7 @@
   "name": "inventory_node_express",
   "version": "1.0.0",
   "description": "Inventory_node_express",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
