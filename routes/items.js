@@ -77,5 +77,16 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// Create Item
+router.get('/createNewItem', (req, res) => {
+    let post = {name:'Asus ROG', qty: 4, amount: 75000};
+    let sql = 'INSERT INTO items SET ?';
+    let query = db.query(sql, post, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Item Added!');
+    });
+});
+
 
 module.exports = router;
