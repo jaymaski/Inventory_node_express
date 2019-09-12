@@ -1,115 +1,151 @@
-const express = require('express');
-const router = express.Router();
-const mysql = require('mysql');
+var express = require('express')
+var app = express()
 
-// Create connection
-const db = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : '',
-    database : 'inventory'
-});
+// SHOW LIST OF ITEMS
+app.get('/', function(req, res, next) {
+	req.getConnection(function(error, conn) {
+		conn.query('SELECT * FROM items ORDER BY id ASC',function(err, rows, fields) {
+			//if(err) throw err
+			if (err) {
+				req.flash('error', err)
+				res.render('items/allItems', {
+					title: 'Item List', 
+					data: ''
+				})
+			} else {
+				// render to views/item/allItems.ejs template file
+				res.render('items/allItems', {
+					title: 'Items List', 
+					data: rows
+				})
+			}
+		})
+	})
+})
 
-// Connect
-db.connect((err) => {
-    if(err){
-        throw err;
-    }
-    console.log('Connected to Database!');
-});
+// SHOW ADD ITEM FORM
+app.get('/addItem', function(req, res, next){	
+	res.render('items/addItem', {
+		title: 'Add New Item',
+		name: '',
+		qty: '',
+		amount: ''		
+	})
+})
 
-//Routes
+// ADD NEW ITEM POST ACTION
+app.post('/addItem', function(req, res, next){	
+	var item = {
+		name: req.body.name,
+		qty: req.body.qty,
+		amount: req.body.amount
+	}
+	
+	req.getConnection(function(error, conn) {
+		conn.query('INSERT INTO items SET ?', item, function(err, result) {
+			//if(err) throw err
+			if (err) {
+				req.flash('error', err)
+				// render to views/items/addItem.ejs
+				res.render('items/addItem', {
+					title: 'Add New Item',
+					name: item.name,
+					qty: item.qty,
+					amount: item.amount					
+				})
+			} else {				
+				req.flash('success', 'Item added to inventory!!!')
+				// render toitems/addItem.ejs
+				res.render('items/addItem', {
+					title: 'Add New Item',
+					name: '',
+					qty: '',
+					amount: ''					
+				})
+			}
+		})
+	})
+})
 
-/*
-// Select posts
-router.get('/', async (req, res) => {
-    try {
-        let results = await db.all();
-        res.json(results);
-    }
-    catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
-});
-*/
+// SHOW EDIT ITEM FORM
+app.get('/editItem/(:id)', function(req, res, next){
+	req.getConnection(function(error, conn) {
+		conn.query('SELECT * FROM items WHERE id = ?', [req.params.id], function(err, rows, fields) {
+			if(err) throw err
+			// if item not found
+			if (rows.length <= 0) {
+				req.flash('error', 'Item not found with id = ' + req.params.id)
+				res.redirect('/items')
+			}
+			else { // if item found
+				// render to views/items/editItem.ejs template file
+				res.render('items/editItem', {
+					title: 'Edit Item', 
+					//data: rows[0],
+					id: rows[0].id,
+					name: rows[0].name,
+					qty: rows[0].qty,
+					amount: rows[0].amount					
+				})
+			}			
+		})
+	})
+})
 
-// Select posts
-router.get('/', (req, res) => {
-    let sql = 'SELECT * FROM items';
-    let query = db.query(sql, (err, results) => {
-        if(err) throw err;
-        res.render('items.ejs', {
-            allItems: results 
-        });
-        //res.json(results);
-    });
-});
+// EDIT ITEM POST ACTION
+app.put('/editItem/(:id)', function(req, res, next) {
+	var item = {
+		name: req.body.name,
+		qty: req.body.qty,
+		amount: req.body.amount
+	}
+	
+	req.getConnection(function(error, conn) {
+		conn.query('UPDATE items SET ? WHERE id = ' + req.params.id, item, function(err, result) {
+			//if(err) throw err
+			if (err) {
+				req.flash('error', err)
+		
+				// render to views/items/addItem.ejs
+				res.render('items/editItem', {
+					title: 'Edit Item',
+					id: req.params.id,
+					name: req.body.name,
+					qty: req.body.qty,
+					amount: req.body.amount
+				})
+			} else {
+				req.flash('success', 'Data updated successfully!')
+				
+				// render to views/items/addItem.ejs
+				res.render('items/editItem', {
+					title: 'Edit Item',
+					id: req.params.id,
+					name: req.body.name,
+					qty: req.body.qty,
+					amount: req.body.amount
+				})
+			}
+		})
+	})
+})
 
-router.get('/items', (req, res) => {
-    let sql = 'SELECT * FROM items';
-    let query = db.query(sql, (err, results) => {
-        if(err) throw err;
-        res.json(results);
-    });
-});
+// DELETE ITEM
+app.delete('/delete/(:id)', function(req, res, next) {
+	var item = { id: req.params.id }
+	
+	req.getConnection(function(error, conn) {
+		conn.query('DELETE FROM items WHERE id = ' + req.params.id, item, function(err, result) {
+			//if(err) throw err
+			if (err) {
+				req.flash('error', err)
+				res.redirect('/items')
+			} else {
+				req.flash('success', 'Item deleted successfully! id = ' + req.params.id)
+				res.redirect('/items')
+			}
+		})
+	})
+})
 
-/*
-// Select single post
-router.get('/:id', async (req, res, next) => {
-    try {
-        let results = await db.one(req.params.id);
-        res.json(results);
-    }
-    catch(e) {
-        console.log(e);
-        res.sendStatus(500);
-    }
-});
-*/
-// Create Item
-router.get('/createNewItem', (req, res) => {
-    let post = {name:'Asus ROG', qty: 4, amount: 75000};
-    let sql = 'INSERT INTO items SET ?';
-    let query = db.query(sql, post, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.send('Item Added!');
-    });
-});
-
-// Select single post
-router.get('/:id', (req, res) => {
-    let sql = `SELECT * FROM items WHERE id = ${req.params.id}`;
-    let query = db.query(sql, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.json(result);
-    });
-});
-
-// Update post
-router.get('/update/:id', (req, res) => {
-    let newName = 'Razer Blade Stealth Updated value 2';
-    let newQty = '7';
-    let newAmount = '120000';
-    //let id = '';
-    let sql = `UPDATE items SET name = ?, qty = ${newQty}, amount = ${newAmount} WHERE id = ${req.params.id}`;
-    let query = db.query(sql, newName, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.send('Item updated! (Go to /items to see changes)');
-    });
-});
-
-// Delete post
-router.get('/delete/:id', (req, res) => {
-    let sql = `DELETE FROM items WHERE id = ${req.params.id}`;
-    let query = db.query(sql, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.send('Item deleted! (Go to /items to see changes)');
-    });
-});
-
-module.exports = router;
+module.exports = app
