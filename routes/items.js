@@ -67,16 +67,6 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 */
-// Select single post
-router.get('/:id', (req, res) => {
-    let sql = `SELECT * FROM items WHERE id = ${req.params.id}`;
-    let query = db.query(sql, (err, result) => {
-        if(err) throw err;
-        console.log(result);
-        res.json(result);
-    });
-});
-
 // Create Item
 router.get('/createNewItem', (req, res) => {
     let post = {name:'Asus ROG', qty: 4, amount: 75000};
@@ -85,6 +75,16 @@ router.get('/createNewItem', (req, res) => {
         if(err) throw err;
         console.log(result);
         res.send('Item Added!');
+    });
+});
+
+// Select single post
+router.get('/:id', (req, res) => {
+    let sql = `SELECT * FROM items WHERE id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
     });
 });
 

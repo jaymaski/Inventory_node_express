@@ -7,8 +7,8 @@ const  itemsRoute = require('./routes/items');
 //Items Routes
 app.use('/', itemsRoute);
 app.use('/items', itemsRoute);
-app.use('/:id', itemsRoute);
 app.use('/createNewItem', itemsRoute);
+app.use('/:id', itemsRoute);
 app.use('/update/:id', itemsRoute);
 app.use('/delete/:id', itemsRoute);
 
