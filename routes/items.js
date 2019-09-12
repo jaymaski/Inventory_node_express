@@ -16,7 +16,8 @@ app.get('/', function(req, res, next) {
 				// render to views/item/allItems.ejs template file
 				res.render('items/allItems', {
 					title: 'Items List', 
-					data: rows
+					data: rows,
+					page: 'allItems'
 				})
 			}
 		})
@@ -29,7 +30,8 @@ app.get('/addItem', function(req, res, next){
 		title: 'Add New Item',
 		name: '',
 		qty: '',
-		amount: ''		
+		amount: '',	
+		page: 'addItem'
 	})
 })
 
@@ -51,7 +53,8 @@ app.post('/addItem', function(req, res, next){
 					title: 'Add New Item',
 					name: item.name,
 					qty: item.qty,
-					amount: item.amount					
+					amount: item.amount,	
+					page: 'addItem'					
 				})
 			} else {				
 				req.flash('success', 'Item added to inventory!!!')
@@ -60,7 +63,8 @@ app.post('/addItem', function(req, res, next){
 					title: 'Add New Item',
 					name: '',
 					qty: '',
-					amount: ''					
+					amount: '',	
+					page: 'addItem'					
 				})
 			}
 		})
@@ -85,7 +89,8 @@ app.get('/editItem/(:id)', function(req, res, next){
 					id: rows[0].id,
 					name: rows[0].name,
 					qty: rows[0].qty,
-					amount: rows[0].amount					
+					amount: rows[0].amount,	
+					page: 'editItem'					
 				})
 			}			
 		})
@@ -123,7 +128,8 @@ app.put('/editItem/(:id)', function(req, res, next) {
 					id: req.params.id,
 					name: req.body.name,
 					qty: req.body.qty,
-					amount: req.body.amount
+					amount: req.body.amount,	
+					page: 'editItem'
 				})
 			}
 		})
