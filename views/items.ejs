@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Inventory</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1>Sample Render Page</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Quantity</td>
+                    <td>Amount</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < allItems.length; i++) { %>
+                    <tr>
+                        <td><%= allItems[i]['id'] %></td>
+                        <td><%= allItems[i]['name'] %></td>
+                        <td><%= allItems[i]['qty'] %></td>
+                        <td><%= allItems[i]['amount'] %></td>
+                        <td>
+                            <form action="/delete">
+                                <button>Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <script src="" async defer></script>
+    </body>
+</html>
