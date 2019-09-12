@@ -102,4 +102,14 @@ router.get('/update/:id', (req, res) => {
     });
 });
 
+// Delete post
+router.get('/delete/:id', (req, res) => {
+    let sql = `DELETE FROM items WHERE id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Item deleted! (Go to /items to see changes)');
+    });
+});
+
 module.exports = router;
