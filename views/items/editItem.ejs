@@ -1,11 +1,11 @@
 <%- include ../layouts/header.ejs %>	
 		
 <% if (messages.error) { %>
-	<p style="color:red"><%- messages.error %></p>
+	<p class="msg__error"><%- messages.error %></p>
 <% } %>
 
 <% if (messages.success) { %>
-	<p style="color:green"><%- messages.success %></p>
+	<p class="msg__success"><%- messages.success %></p>
 <% } %>
 
 <form action="/items/editItem/<%= id %>" method="post" name="form1">
