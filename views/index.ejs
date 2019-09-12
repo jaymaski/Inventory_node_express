@@ -1,2 +1,11 @@
-<%- include layouts/header.ejs %>	
+<%- include layouts/header.ejs %>
+
+<h1 class="header"><%= title %></h1>
+<h4 class="home__author">by <%= author %></h4>
+
+<div class="button__container">
+    <a class="home__button" href="/items/addItem"> Add New Item </a>
+    <a class="home__button" href="/items"> See All Items </a>
+</div>
+
 <%- include layouts/footer.ejs %>
