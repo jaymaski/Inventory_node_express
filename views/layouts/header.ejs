@@ -1,12 +1,13 @@
 <html>
 	<head>
 		<title><%= title %></title>
-		<link href="css/style.css" rel="stylesheet">
+		<link href="../../css/styles.css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<div>
-			<a href="/">Home</a> | 
-			<a href="/items/addItem">Add New Item</a> | 
-			<a href="/items">All Items List</a>
-		</div>	
-		<h1><%= title %></h1>
+		<ul class="nav">
+			<li class="nav__items"><a class="nav__items-link" class="active" href="/">Home</a></li>
+			<li class="nav__items"><a class="nav__items-link" href="/items/addItem">Add</a></li>
+			<li class="nav__items"><a class="nav__items-link" href="/items">All Items</a></li>
+		</ul>
+		<h1 class="header"><%= title %></h1>

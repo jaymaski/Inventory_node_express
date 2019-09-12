@@ -55,6 +55,7 @@ app.use(session({
 }))
 app.use(flash())
 
+app.use(express.static(__dirname + '/public'));
 
 app.use('/', index)
 app.use('/items', items)

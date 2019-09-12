@@ -1,0 +1,45 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  font-family: 'Raleway', sans-serif;
+}
+  
+.nav__items {
+  float: left;
+}
+  
+.nav__items-link {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+  
+.nav__items-link:hover {
+  background-color: #111;
+}
+
+.header {
+  margin: 70px 0 0 0;
+  line-height: 30px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 50px;
+}
+
+.home__author {
+  line-height: 50px;
+  width: 100%;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+}
