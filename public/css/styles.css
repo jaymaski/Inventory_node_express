@@ -147,6 +147,10 @@ table.center-big {
 }
 
 .msg__success {
-  color: rgb(50, 223, 116);
+  color: rgb(45, 182, 97);
   font-family: 'Raleway', sans-serif;
+}
+
+.width-20 {
+  width: 30%;
 }
