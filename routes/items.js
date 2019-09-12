@@ -46,4 +46,36 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/items', (req, res) => {
+    let sql = 'SELECT * FROM items';
+    let query = db.query(sql, (err, results) => {
+        if(err) throw err;
+        res.json(results);
+    });
+});
+
+/*
+// Select single post
+router.get('/:id', async (req, res, next) => {
+    try {
+        let results = await db.one(req.params.id);
+        res.json(results);
+    }
+    catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+*/
+// Select single post
+router.get('/:id', (req, res) => {
+    let sql = `SELECT * FROM items WHERE id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.json(result);
+    });
+});
+
+
 module.exports = router;
