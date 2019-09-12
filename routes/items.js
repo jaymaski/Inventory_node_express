@@ -88,5 +88,18 @@ router.get('/createNewItem', (req, res) => {
     });
 });
 
+// Update post
+router.get('/update/:id', (req, res) => {
+    let newName = 'Razer Blade Stealth Updated value 2';
+    let newQty = '7';
+    let newAmount = '120000';
+    //let id = '';
+    let sql = `UPDATE items SET name = ?, qty = ${newQty}, amount = ${newAmount} WHERE id = ${req.params.id}`;
+    let query = db.query(sql, newName, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send('Item updated! (Go to /items to see changes)');
+    });
+});
 
 module.exports = router;
