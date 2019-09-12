@@ -18,6 +18,7 @@
                     <td>Quantity</td>
                     <td>Amount</td>
                     <td></td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
@@ -28,9 +29,13 @@
                         <td><%= allItems[i]['qty'] %></td>
                         <td><%= allItems[i]['amount'] %></td>
                         <td>
-                            <form action="/delete">
-                                <button>Delete</button>
-                            </form>
+                            <div style="float:left">
+                                <a href="/update/<%= allItems[i]['id'] %>">Edit</a> &nbsp;							
+                                <form method="post" action="/countries/delete/<%= allItems[i]['id'] %>" style="float:right">
+                                    <input type="submit" name="delete" value='Delete' onClick="return confirm('Are you sure you want to delete?')" />
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <% } %>
