@@ -1,23 +1,21 @@
 <%- include layouts/header.ejs %>
 
-<h1 class="header"><%= title %></h1>
 <h4 class="home__author">by <%= author %></h4>
-
-<div class="button__container">
-	<a class="home__button" href="/items"> See All Items </a>
-</div>
 
 <div>
 	<% for(i = 0; i < Object.keys(category).length; i++) { %>
 	<a href="" class="category_container">
-		<div class="category_lower">
-
+		<div class="category_upper">
+			<img src='assets/images/logos/<%=Object.values(category_image)[i]%>'>
 		</div>
 		<div class="category_lower">
 			<%= Object.values(category)[i] %>
 		</div>
 	</a>
 	<% } %>
+</div>
+<div class="button__container">
+	<a class="home__button" href="/items"> See All Items </a>
 </div>
 
 <%- include layouts/footer.ejs %>
