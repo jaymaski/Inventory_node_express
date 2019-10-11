@@ -5,31 +5,7 @@ html {
 
 body {
   text-align: center;
-}
-
-.nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: rgb(47, 47, 47);
-  font-family: 'Raleway', sans-serif;
-}
-  
-.nav__items {
-  float: left;
-}
-  
-.nav__items-link {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-  
-.nav__items-link:hover {
-  background-color: #111;
+  margin: 0px;
 }
 
 .header {
@@ -37,7 +13,9 @@ body {
   line-height: 30px;
   width: 100%;
   text-align: center;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-style: Black;
   font-size: 50px;
 }
 
@@ -55,17 +33,17 @@ body {
 }
 
 .home__button {
-  background-color: rgb(221, 124, 34);
+  background-color: rgba(47, 47, 47, 0.3);
   font-family: 'Raleway', sans-serif;
   border: none;
   border-radius: 100px;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 100px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 4px;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -91,7 +69,7 @@ body {
 }
 
 .home__button:hover {
-  background-color: rgb(189, 108, 33);
+  background-color: rgba(47, 47, 47, 0.6);
 }
 
 .table__cotainer {
@@ -115,9 +93,9 @@ body {
 table.center {
   font-family: 'Raleway', sans-serif;
   margin: 3% 0 0 0;
-  width: 30%; 
-  margin-left: 35%; 
-  margin-right: 35%;
+  width: 80%; 
+  margin-left: 10%; 
+  margin-right: 10%;
 }
 
 table.center-big {
@@ -153,4 +131,34 @@ table.center-big {
 
 .width-20 {
   width: 30%;
+}
+
+.category_container {
+	border-radius: 10px;
+	width: 100px;
+	height: 100px;
+	background-color: rgba(47, 47, 47, 0.5);
+	display: inline-block;
+	margin: 3px;
+	text-align: center;
+	font-family: 'Raleway', sans-serif;
+	padding: 5px 10px 17px 10px;
+	text-decoration: none;
+	font-size: 16px;
+	cursor: pointer;
+	transition: 0.3s;
+	color: white;
+}
+
+.category_container:hover, category_container:active {
+	background-color: rgba(47, 47, 47, 0.6);
+	color: white;
+}
+
+.category_upper {
+	
+}
+
+.category_lower {
+
 }

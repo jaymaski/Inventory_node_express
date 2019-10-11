@@ -1,18 +1,21 @@
 <html>
-	<head>
-		<title><%= title %></title>
-		<link href="../../css/styles.css" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-	</head>
-	<body>
-		<% if(page == 'home'){ %>
-			
-		<% } else { %>
-			<ul class="nav">
-				<li class="nav__items"><a class="nav__items-link" class="active" href="/">Home</a></li>
-				<li class="nav__items"><a class="nav__items-link" href="/items/addItem">Add</a></li>
-				<li class="nav__items"><a class="nav__items-link" href="/items">All Items</a></li>
-			</ul>
-			<h1 class="header"><%= title %></h1>
-		<% } %>
-		
+
+<head>
+	<title><%= title %></title>
+	<link href="../../css/styles.css" rel="stylesheet">
+	<link href="../../css/layout.css" rel="stylesheet">
+	<link href="../../css/allitems.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<% if(page == ''){ %>
+
+	<% } else { %>
+	<ul class="nav">
+		<li class="nav__items"><a class="nav__items-link" class="active" href="/">Home</a></li>
+		<li class="nav__items"><a class="nav__items-link" href="/items">All Items</a></li>
+	</ul>
+	<h1 class="header"><%= title %></h1>
+	<% } %>
