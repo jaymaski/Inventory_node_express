@@ -4,8 +4,20 @@
 <h4 class="home__author">by <%= author %></h4>
 
 <div class="button__container">
-    <a class="home__button" href="/items/addItem"> Add New Item </a>
-    <a class="home__button" href="/items"> See All Items </a>
+	<a class="home__button" href="/items"> See All Items </a>
+</div>
+
+<div>
+	<% for(i = 0; i < Object.keys(category).length; i++) { %>
+	<a href="" class="category_container">
+		<div class="category_lower">
+
+		</div>
+		<div class="category_lower">
+			<%= Object.values(category)[i] %>
+		</div>
+	</a>
+	<% } %>
 </div>
 
 <%- include layouts/footer.ejs %>
