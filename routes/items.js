@@ -4,7 +4,7 @@ var app = express()
 // SHOW LIST OF ITEMS
 app.get('/', function (req, res, next) {
 	req.getConnection(function (error, conn) {
-		conn.query('SELECT * FROM items ORDER BY id ASC', function (err, rows, fields) {
+		conn.query('SELECT * FROM items ORDER BY id DESC', function (err, rows, fields) {
 			//if(err) throw err
 			if (err) {
 				req.flash('error', err)
@@ -21,6 +21,44 @@ app.get('/', function (req, res, next) {
 					qty: '',
 					amount: '',
 					page: 'allItems'
+				})
+			}
+		})
+	})
+})
+
+// SHOW LIST OF ITEMS (CATEGORY)
+app.get('/category', function (req, res, next) {
+	req.getConnection(function (error, conn) {
+			//var { body } = req;
+			//var { category } = body;
+			var category = req.body.category;
+			var cat = {
+				category : req.body.category,
+			}
+			//escape(category).toLowerCase();
+			console.log(cat);
+		conn.query("SELECT * FROM items WHERE category = '" + category + "'", function (err, rows, fields) {
+			//if(err) throw err
+			if (err) {
+				req.flash('error', err)
+				res.render('items/allItems', {
+					title: 'Item List',
+					name: '',
+					qty: '',
+					amount: '',
+					data: '',
+					page: 'category'
+				})
+			} else {
+				// render to views/item/allItems.ejs template file
+				res.render('items/allItems', {
+					title: 'Items List',
+					data: rows,
+					name: '',
+					qty: '',
+					amount: '',
+					page: 'category'
 				})
 			}
 		})
